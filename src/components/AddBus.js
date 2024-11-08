@@ -1,88 +1,96 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { API_BASE_URL, API_ENDPOINTS } from '../config';
 
 function AddBus() {
-  const navigate = useNavigate();
   const [busData, setBusData] = useState({
+    busName: '',
+    busCapability: undefined,
     busNumber: '',
-    route: '',
-    driver: '',
-    status: 'Active'
+    status: true,
+    id: 0,
   });
+  const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
-    setBusData({
-      ...busData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setBusData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Replace with your actual API endpoint
-      await axios.post('http://your-api-url/buses', busData);
-      navigate('/');
+      const response = await fetch(`${API_BASE_URL}/add/bus`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({...busData, "busCapability": parseInt(busData.busCapability)})
+      });
+
+      if (response.ok) {
+        setMessage('Bus added successfully!');
+        setBusData({
+          busName: '',
+          busCapability: '',
+          busNumber: '',
+          status: true
+        });
+      } else {
+        setMessage('Failed to add bus. Please try again.');
+      }
     } catch (error) {
-      console.error('Error adding bus:', error);
+      setMessage('Error: ' + error.message);
     }
   };
 
   return (
-    <div>
+    <div className="add-bus-container">
       <h2>Add New Bus</h2>
+      {message && <div className="message">{message}</div>}
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Bus Number</label>
+        <div className="form-group">
+          <label htmlFor="busName">Bus Name:</label>
           <input
             type="text"
-            className="form-control"
+            id="busName"
+            name="busName"
+            value={busData.busName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="busCapability">Bus Capacity:</label>
+          <input
+            type="number"
+            id="busCapability"
+            name="busCapability"
+            value={busData.busCapability}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="busNumber">Bus Number:</label>
+          <input
+            type="text"
+            id="busNumber"
             name="busNumber"
             value={busData.busNumber}
             onChange={handleChange}
             required
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Route</label>
-          <input
-            type="text"
-            className="form-control"
-            name="route"
-            value={busData.route}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Driver</label>
-          <input
-            type="text"
-            className="form-control"
-            name="driver"
-            value={busData.driver}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Status</label>
-          <select
-            className="form-control"
-            name="status"
-            value={busData.status}
-            onChange={handleChange}
-          >
-            <option value="Active">Active</option>
-            <option value="Maintenance">Maintenance</option>
-            <option value="Out of Service">Out of Service</option>
-          </select>
-        </div>
-        <button type="submit" className="btn btn-primary">Add Bus</button>
+
+        <button type="submit">Add Bus</button>
       </form>
     </div>
   );
 }
 
-export default AddBus; 
+export default AddBus;

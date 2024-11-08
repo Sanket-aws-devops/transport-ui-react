@@ -10,4 +10,155 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.add-bus-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+button[type="submit"] {
+  background-color: #1976d2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #1565c0;
+}
+
+.bus-list-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.bus-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.bus-table th,
+.bus-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.bus-table th {
+  background-color: #1976d2;
+  color: white;
+  font-weight: bold;
+}
+
+.bus-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.error-message {
+  color: #d32f2f;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #ffebee;
+  border-radius: 4px;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.save-btn:hover {
+  background-color: #218838;
+}
+
+.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancel-btn:hover {
+  background-color: #5a6268;
+}
+
+.bus-table input,
+.bus-table select {
+  width: 90%;
+  padding: 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 } 
